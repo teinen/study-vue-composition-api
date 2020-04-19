@@ -5,22 +5,34 @@
 
     <h2>Mouse Position</h2>
     <p>X: {{ mousePos.x }}, Y: {{ mousePos.y }}</p>
+
+    <h2>Props/Emit</h2>
+    <ChildComponent :message="state.message" @updateMessage="updateHandler" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/composition-api";
+import { defineComponent, reactive } from "@vue/composition-api";
 import Counter from "./components/Counter.vue";
+import ChildComponent from "./components/ChildComponent.vue";
 import { useMousePosition } from "./compositions/mouse";
 
 export default defineComponent({
   components: {
-    Counter
+    Counter,
+    ChildComponent
   },
   setup() {
-    const { mousePos } = useMousePosition();
+    const state = reactive({
+      message: "This is initial message."
+    });
+    const mousePos = useMousePosition();
 
-    return { mousePos };
+    function updateHandler(inputMessage: string) {
+      state.message = inputMessage;
+    }
+
+    return { state, mousePos, updateHandler };
   }
 });
 </script>
