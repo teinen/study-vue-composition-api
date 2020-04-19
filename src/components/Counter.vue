@@ -11,7 +11,8 @@ import {
   defineComponent,
   reactive,
   computed,
-  watchEffect
+  watchEffect,
+  onMounted
 } from "@vue/composition-api";
 
 interface State {
@@ -21,6 +22,14 @@ interface State {
 
 export default defineComponent({
   setup() {
+    // created hook is included in setup()
+    console.log("component is created!");
+
+    // mounted hook
+    onMounted(() => {
+      console.log("component is mounted!");
+    });
+
     const state: State = reactive({
       count: 0,
       double: computed(() => state.count * 2)
