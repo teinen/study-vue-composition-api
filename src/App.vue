@@ -1,13 +1,29 @@
 <template>
   <div id="app">
-    sample
+    <h2>Counter</h2>
+    <Counter />
   </div>
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent, ref, reactive } from "@vue/composition-api";
+import Counter from "./components/Counter.vue";
 
-export default Vue.extend({});
+export default defineComponent({
+  components: {
+    Counter
+  },
+  setup() {
+    const message = ref("Hello Composition API!");
+    const reactiveObj = reactive({
+      message: "Hello Composition API!"
+    });
+    return {
+      reactiveObj,
+      message
+    };
+  }
+});
 </script>
 
 <style>
