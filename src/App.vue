@@ -2,26 +2,25 @@
   <div id="app">
     <h2>Counter</h2>
     <Counter />
+
+    <h2>Mouse Position</h2>
+    <p>X: {{ mousePos.x }}, Y: {{ mousePos.y }}</p>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive } from "@vue/composition-api";
+import { defineComponent } from "@vue/composition-api";
 import Counter from "./components/Counter.vue";
+import { useMousePosition } from "./compositions/mouse";
 
 export default defineComponent({
   components: {
     Counter
   },
   setup() {
-    const message = ref("Hello Composition API!");
-    const reactiveObj = reactive({
-      message: "Hello Composition API!"
-    });
-    return {
-      reactiveObj,
-      message
-    };
+    const { mousePos } = useMousePosition();
+
+    return { mousePos };
   }
 });
 </script>
