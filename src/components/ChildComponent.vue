@@ -20,7 +20,7 @@ export default defineComponent({
     const inputMessage = ref("");
 
     function updateMessage() {
-      context.emit("updateMessage", inputMessage);
+      context.emit("updateMessage", inputMessage.value);
     }
 
     return {
