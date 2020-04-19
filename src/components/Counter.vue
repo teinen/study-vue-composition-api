@@ -7,7 +7,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, computed } from "@vue/composition-api";
+import {
+  defineComponent,
+  reactive,
+  computed,
+  watchEffect
+} from "@vue/composition-api";
 
 interface State {
   count: number;
@@ -24,6 +29,10 @@ export default defineComponent({
     function increment() {
       state.count++;
     }
+
+    watchEffect(() => {
+      console.log(`Current count is: ${state.count}`);
+    });
 
     return {
       state,
